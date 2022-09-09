@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "307897668289",
+    "project_id": "sidework-839c2",
+    "storage_bucket": "sidework-839c2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:307897668289:android:9c1b1c528247e63f45ba40",
+        "android_client_info": {
+          "package_name": "com.example.sidework_mobile"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "307897668289-jvicbldf323mp5m0rf3l4r44ji5n96nh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAPxnc7w6RonQxQvtqM03U25pUCBY3LA1c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "307897668289-jvicbldf323mp5m0rf3l4r44ji5n96nh.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "307897668289-lh6h8vpbprna36ttdqq4lk89s7dkag60.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.sideworkMobile"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
