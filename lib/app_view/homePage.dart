@@ -25,8 +25,8 @@ class HomePageState extends State<HomePage> {
         actions: [
           ElevatedButton(
             onPressed: () {
-              Navigator.push(
-                  context, MaterialPageRoute(builder: (_) => LoginPage()));
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (_) => const LoginPage()));
             },
             style: ElevatedButton.styleFrom(
               primary: Constants.sideworkBlue,
