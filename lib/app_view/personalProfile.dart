@@ -156,14 +156,14 @@ class PersonalProfileState extends State<PersonalProfile> {
         .get()
         .then((user) {
       setState(() {
-        firstNameController.text = user.data()!['firstName'];
-        lastNameController.text = user.data()!['lastName'];
-        addressOneController.text = user.data()!['addressOne'];
-        addressTwoController.text = user.data()!['addressTwo'];
-        cityController.text = user.data()!['city'];
-        stateController.text = user.data()!['state'];
-        zipController.text = user.data()!['zip'];
-        phoneController.text = user.data()!['phoneNumber'];
+        firstNameController.text = user.data()?['firstName'] ?? '';
+        lastNameController.text = user.data()?['lastName'] ?? '';
+        addressOneController.text = user.data()?['addressOne'] ?? '';
+        addressTwoController.text = user.data()?['addressTwo'] ?? '';
+        cityController.text = user.data()?['city'] ?? '';
+        stateController.text = user.data()?['state'] ?? '';
+        zipController.text = user.data()?['zip'] ?? '';
+        phoneController.text = user.data()?['phoneNumber'] ?? '';
         finishLoading = true;
       });
     });

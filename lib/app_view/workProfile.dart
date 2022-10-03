@@ -33,7 +33,7 @@ class WorkProfileState extends State<WorkProfile> {
     'Pest Control',
     'Yard Work',
   ];
-  String selectedValue = '';
+  String? selectedValue;
   bool finishLoading = false;
 
   @override
@@ -178,15 +178,15 @@ class WorkProfileState extends State<WorkProfile> {
         .get()
         .then((user) {
       setState(() {
-        firstNameController.text = user.data()!['firstName'];
-        lastNameController.text = user.data()!['lastName'];
-        cityController.text = user.data()!['city'];
-        stateController.text = user.data()!['state'];
-        zipController.text = user.data()!['zip'];
-        phoneController.text = user.data()!['phoneNumber'];
-        hourlyRateController.text = user.data()!['hourlyRate'];
-        tagsController.text = user.data()!['tags'];
-        selectedValue = user.data()!['tags'];
+        firstNameController.text = user.data()?['firstName'] ?? '';
+        lastNameController.text = user.data()?['lastName'] ?? '';
+        cityController.text = user.data()?['city'] ?? '';
+        stateController.text = user.data()?['state'] ?? '';
+        zipController.text = user.data()?['zip'] ?? '';
+        phoneController.text = user.data()?['phoneNumber'] ?? '';
+        hourlyRateController.text = user.data()?['hourlyRate'] ?? '';
+        tagsController.text = user.data()?['tags'] ?? '';
+        selectedValue = user.data()?['tags'];
         finishLoading = true;
       });
     });
