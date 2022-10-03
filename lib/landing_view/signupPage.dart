@@ -25,11 +25,15 @@ class SignUpPageState extends State<SignUpPage> {
       body: Container(
         margin: const EdgeInsets.symmetric(
           horizontal: 8,
-          vertical: 20,
+          vertical: 32,
         ),
         child: Center(
           child: Column(
             children: [
+              const SizedBox(
+                height: 16,
+              ),
+
               /// SIGN UP TEXT
               const Text(
                 'Sign Up',

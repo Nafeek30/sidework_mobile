@@ -25,11 +25,15 @@ class LoginPageState extends State<LoginPage> {
       body: Container(
         margin: const EdgeInsets.symmetric(
           horizontal: 8,
-          vertical: 20,
+          vertical: 32,
         ),
         child: Center(
           child: Column(
             children: [
+              const SizedBox(
+                height: 16,
+              ),
+
               /// LOGIN TEXT
               const Text(
                 'Login',
