@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+import 'package:sidework_mobile/controller/firebaseController.dart';
 import 'package:sidework_mobile/utilities/constants.dart';
 import 'package:sidework_mobile/utilities/customFormTextFields.dart';
 
@@ -39,34 +39,42 @@ class PersonalProfileState extends State<PersonalProfile> {
             child: Column(
               children: [
                 CustomFormTextFields(
+                  maxLines: 1,
                   controller: firstNameController,
                   hintTitle: 'First Name',
                 ),
                 CustomFormTextFields(
+                  maxLines: 1,
                   controller: lastNameController,
                   hintTitle: 'Last Name',
                 ),
                 CustomFormTextFields(
+                  maxLines: 1,
                   controller: addressOneController,
                   hintTitle: 'Address line 1',
                 ),
                 CustomFormTextFields(
+                  maxLines: 1,
                   controller: addressTwoController,
                   hintTitle: 'Address line 2',
                 ),
                 CustomFormTextFields(
+                  maxLines: 1,
                   controller: cityController,
                   hintTitle: 'City',
                 ),
                 CustomFormTextFields(
+                  maxLines: 1,
                   controller: stateController,
                   hintTitle: 'State',
                 ),
                 CustomFormTextFields(
+                  maxLines: 1,
                   controller: zipController,
                   hintTitle: 'Zip code',
                 ),
                 CustomFormTextFields(
+                  maxLines: 1,
                   controller: phoneController,
                   hintTitle: 'Phone number',
                 ),
@@ -101,52 +109,6 @@ class PersonalProfileState extends State<PersonalProfile> {
         : const Center(
             child: CircularProgressIndicator(),
           );
-  }
-
-  savePersonalProfile(
-      String firstName,
-      String lastName,
-      String addressOne,
-      String addressTwo,
-      String city,
-      String state,
-      String zip,
-      String phoneNumber,
-      String email) async {
-    var data = {
-      "firstName": firstName,
-      "lastName": lastName,
-      "addressOne": addressOne,
-      "addressTwo": addressTwo,
-      "city": city,
-      "state": state,
-      "zip": zip,
-      "phoneNumber": phoneNumber,
-      "email": email,
-    };
-
-    try {
-      FirebaseFirestore.instance
-          .collection('users')
-          .doc(FirebaseAuth.instance.currentUser!.uid)
-          .set(
-            data,
-            SetOptions(merge: true),
-          )
-          .then((value) {
-        Fluttertoast.showToast(
-          msg: "Changes saved.",
-          backgroundColor: Constants.sideworkBlue,
-          textColor: Constants.lightTextColor,
-        );
-      });
-    } catch (e) {
-      Fluttertoast.showToast(
-        msg: e.toString(),
-        backgroundColor: Constants.sideworkBlue,
-        textColor: Constants.lightTextColor,
-      );
-    }
   }
 
   getInitialData() async {

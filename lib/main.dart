@@ -1,3 +1,4 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:sidework_mobile/utilities/constants.dart';
 import 'package:sidework_mobile/landing_view/loginPage.dart';
 import 'package:flutter/material.dart';
@@ -29,5 +30,3 @@ class SideWorkApp extends StatelessWidget {
     );
   }
 }
-
-

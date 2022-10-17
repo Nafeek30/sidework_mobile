@@ -1,5 +1,6 @@
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:sidework_mobile/app_view/bookings.dart';
 import 'package:sidework_mobile/app_view/homePage.dart';
 import 'package:sidework_mobile/app_view/profiles.dart';
 
@@ -39,6 +40,13 @@ class BottomNavbarState extends State<BottomNavbar> {
               builder: (_) => const HomePage(),
             ),
           );
+        } else if (_currentIndex == 1) {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (_) => Bookings(),
+            ),
+          );
         } else if (_currentIndex == 2) {
           Navigator.push(
             context,
@@ -50,26 +58,26 @@ class BottomNavbarState extends State<BottomNavbar> {
       },
       items: <BottomNavyBarItem>[
         BottomNavyBarItem(
-          icon: Icon(Icons.apps),
-          title: Text('Home'),
+          icon: const Icon(Icons.apps),
+          title: const Text('Home'),
           activeColor: Colors.red,
           textAlign: TextAlign.center,
         ),
         BottomNavyBarItem(
-          icon: Icon(Icons.message),
-          title: Text('Messages'),
+          icon: const Icon(Icons.message),
+          title: const Text('Bookings'),
           activeColor: Colors.pink,
           textAlign: TextAlign.center,
         ),
         BottomNavyBarItem(
-          icon: Icon(Icons.people),
-          title: Text('Profile'),
+          icon: const Icon(Icons.people),
+          title: const Text('Profile'),
           activeColor: Colors.purpleAccent,
           textAlign: TextAlign.center,
         ),
         BottomNavyBarItem(
-          icon: Icon(Icons.settings),
-          title: Text('Settings'),
+          icon: const Icon(Icons.settings),
+          title: const Text('Settings'),
           activeColor: Colors.blue,
           textAlign: TextAlign.center,
         ),

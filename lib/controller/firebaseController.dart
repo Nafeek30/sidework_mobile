@@ -86,3 +86,161 @@ class FirebaseController {
     }
   }
 }
+
+/// Function to save personal profile data
+savePersonalProfile(
+    String firstName,
+    String lastName,
+    String addressOne,
+    String addressTwo,
+    String city,
+    String state,
+    String zip,
+    String phoneNumber,
+    String email) async {
+  var data = {
+    "firstName": firstName,
+    "lastName": lastName,
+    "addressOne": addressOne,
+    "addressTwo": addressTwo,
+    "city": city,
+    "state": state,
+    "zip": zip,
+    "phoneNumber": phoneNumber,
+    "email": email,
+    "isAdmin": false,
+    "isBanned": false,
+  };
+
+  try {
+    FirebaseFirestore.instance
+        .collection('users')
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .set(
+          data,
+          SetOptions(merge: true),
+        )
+        .then((value) {
+      Fluttertoast.showToast(
+        msg: "Changes saved.",
+        backgroundColor: Constants.sideworkBlue,
+        textColor: Constants.lightTextColor,
+      );
+    });
+  } catch (e) {
+    Fluttertoast.showToast(
+      msg: e.toString(),
+      backgroundColor: Constants.sideworkBlue,
+      textColor: Constants.lightTextColor,
+    );
+  }
+}
+
+/// Function to save work profile data
+saveWorkProfile(
+    String firstName,
+    String lastName,
+    String city,
+    String state,
+    String zip,
+    String phoneNumber,
+    String hourlyRate,
+    String tags,
+    String email) async {
+  var data = {
+    "firstName": firstName,
+    "lastName": lastName,
+    "city": city,
+    "state": state,
+    "zip": zip,
+    "phoneNumber": phoneNumber,
+    "hourlyRate": hourlyRate,
+    "tags": tags,
+    "email": email,
+  };
+
+  try {
+    FirebaseFirestore.instance
+        .collection('users')
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .set(
+          data,
+          SetOptions(merge: true),
+        )
+        .then((value) {
+      Fluttertoast.showToast(
+        msg: "Changes saved.",
+        backgroundColor: Constants.sideworkBlue,
+        textColor: Constants.lightTextColor,
+      );
+    });
+  } catch (e) {
+    Fluttertoast.showToast(
+      msg: e.toString(),
+      backgroundColor: Constants.sideworkBlue,
+      textColor: Constants.lightTextColor,
+    );
+  }
+}
+
+/// Function to create a new booking
+Future<void> saveBooking(
+    String description, String handymanEmail, BuildContext context) async {
+  try {
+    await FirebaseFirestore.instance
+        .collection('users')
+        .where('email', isEqualTo: handymanEmail)
+        .get()
+        .then((querySnapshot) {
+      FirebaseFirestore.instance
+          .collection("users")
+          .doc(FirebaseAuth.instance.currentUser!.uid)
+          .get()
+          .then((clientUser) {
+        var handyman = querySnapshot.docs.first;
+
+        var data = {
+          "handymanEmail": handyman.data()['email'],
+          "handymanFirstName": handyman.data()['firstName'],
+          "handymanLastName": handyman.data()['lastName'],
+          "clientEmail": clientUser.data()!['email'],
+          "clientFirstName": clientUser.data()!['firstName'],
+          "clientLastName": clientUser.data()!['lastName'],
+          "clientAddressOne": clientUser.data()!['addressOne'],
+          "clientAddressTwo": clientUser.data()!['addressTwo'],
+          "clientCity": clientUser.data()!['city'],
+          "clientState": clientUser.data()!['state'],
+          "clientZip": clientUser.data()!['zip'],
+          "clientPhoneNumber": clientUser.data()!['phoneNumber'],
+          "handymanPhoneNumber": handyman.data()['phoneNumber'],
+          "clientDescription": description,
+          "bookingHours": 0.0,
+          "totalPrice": 0.0,
+          "bookingConfirmed": false,
+          "bookingPaid": false,
+        };
+        FirebaseFirestore.instance
+            .collection('bookings')
+            .doc()
+            .set(
+              data,
+              SetOptions(merge: true),
+            )
+            .then((value) {
+          Fluttertoast.showToast(
+            msg: "Booking sent!",
+            backgroundColor: Constants.sideworkBlue,
+            textColor: Constants.lightTextColor,
+          );
+          Navigator.pop(context);
+        });
+      });
+    });
+  } catch (e) {
+    Fluttertoast.showToast(
+      msg: e.toString(),
+      backgroundColor: Constants.sideworkBlue,
+      textColor: Constants.lightTextColor,
+    );
+  }
+}

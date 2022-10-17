@@ -4,8 +4,12 @@ import 'package:sidework_mobile/utilities/constants.dart';
 class CustomFormTextFields extends StatefulWidget {
   final TextEditingController controller;
   final String hintTitle;
+  final int maxLines;
   const CustomFormTextFields(
-      {Key? key, required this.controller, required this.hintTitle})
+      {Key? key,
+      required this.controller,
+      required this.hintTitle,
+      required this.maxLines})
       : super(key: key);
 
   @override
@@ -31,6 +35,7 @@ class CustomFormTextFieldsState extends State<CustomFormTextFields> {
         child: Padding(
           padding: const EdgeInsets.only(left: 16),
           child: TextField(
+            maxLines: widget.maxLines,
             decoration: InputDecoration(
               border: InputBorder.none,
               hintText: widget.hintTitle,

@@ -1,21 +1,20 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:sidework_mobile/app_view/personalProfile.dart';
-import 'package:sidework_mobile/app_view/workProfile.dart';
+import 'package:sidework_mobile/app_view/personalBookings.dart';
+import 'package:sidework_mobile/app_view/workBookings.dart';
 import 'package:sidework_mobile/landing_view/loginPage.dart';
 import 'package:sidework_mobile/utilities/bottomNavbar.dart';
 import 'package:sidework_mobile/utilities/constants.dart';
 
-class Profiles extends StatefulWidget {
-  const Profiles({Key? key}) : super(key: key);
+class Bookings extends StatefulWidget {
+  const Bookings({Key? key}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
-    return ProfilesState();
+    return BookingsState();
   }
 }
 
-class ProfilesState extends State<Profiles> {
+class BookingsState extends State<Bookings> {
   int currentProfile = 0;
 
   @override
@@ -25,7 +24,7 @@ class ProfilesState extends State<Profiles> {
         backgroundColor: Constants.sideworkBlue,
         leading: Container(),
         title: const Text(
-          'Profiles',
+          'Bookings',
         ),
         actions: [
           ElevatedButton(
@@ -89,19 +88,19 @@ class ProfilesState extends State<Profiles> {
                         currentProfile = 1;
                       });
                     },
-                    child: const Text('Professional'),
+                    child: const Text('Work'),
                   ),
                 ],
               ),
               currentProfile == 0
-                  ? const PersonalProfile()
-                  : const WorkProfile(),
+                  ? const PersonalBookings()
+                  : const WorkBookings(),
             ],
           ),
         ),
       ),
       bottomNavigationBar: const BottomNavbar(
-        currentIndex: 2,
+        currentIndex: 1,
       ),
     );
   }
