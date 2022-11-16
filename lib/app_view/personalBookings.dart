@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:sidework_mobile/app_view/chatScreen.dart';
 import 'package:sidework_mobile/utilities/constants.dart';
 
 class PersonalBookings extends StatefulWidget {
@@ -37,25 +38,44 @@ class PersonalBookingsState extends State<PersonalBookings> {
                 itemBuilder: (BuildContext context, int index) {
                   return Material(
                     elevation: 8,
-                    child: ListTile(
-                      leading: CircleAvatar(
-                        backgroundColor: Constants.sideworkBlue,
-                        child: Text(
-                          '${index + 1}',
-                          style: const TextStyle(
-                            color: Constants.lightTextColor,
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => ChatScreen(
+                              clientEmail: allPesonalBookings[index]
+                                  ['clientEmail'],
+                              handymanEmail: allPesonalBookings[index]
+                                  ['handymanEmail'],
+                              firstName: allPesonalBookings[index]
+                                  ['handymanFirstName'],
+                              lastName: allPesonalBookings[index]
+                                  ['handymanLastName'],
+                            ),
+                          ),
+                        );
+                      },
+                      child: ListTile(
+                        leading: CircleAvatar(
+                          backgroundColor: Constants.sideworkBlue,
+                          child: Text(
+                            '${index + 1}',
+                            style: const TextStyle(
+                              color: Constants.lightTextColor,
+                            ),
                           ),
                         ),
-                      ),
-                      title: Text(
-                          '${allPesonalBookings[index]['handymanFirstName']} ${allPesonalBookings[index]['handymanLastName']}'),
-                      subtitle: Text(
-                        'Confirmation Status: ${allPesonalBookings[index]['bookingConfirmed'] ? 'Confirmed' : 'Pending'}',
-                        style: TextStyle(
-                          fontWeight: FontWeight.w700,
-                          color: allPesonalBookings[index]['bookingConfirmed']
-                              ? Constants.sideworkGreen
-                              : Constants.darkTextColor,
+                        title: Text(
+                            '${allPesonalBookings[index]['handymanFirstName']} ${allPesonalBookings[index]['handymanLastName']}'),
+                        subtitle: Text(
+                          'Confirmation Status: ${allPesonalBookings[index]['bookingConfirmed'] ? 'Confirmed' : 'Pending'}',
+                          style: TextStyle(
+                            fontWeight: FontWeight.w700,
+                            color: allPesonalBookings[index]['bookingConfirmed']
+                                ? Constants.sideworkGreen
+                                : Constants.darkTextColor,
+                          ),
                         ),
                       ),
                     ),

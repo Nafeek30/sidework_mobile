@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:sidework_mobile/app_view/chatScreen.dart';
 import 'package:sidework_mobile/utilities/constants.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -43,58 +44,78 @@ class WorkBookingsState extends State<WorkBookings> {
                 itemBuilder: (BuildContext context, int index) {
                   return Material(
                     elevation: 8,
-                    child: ListTile(
-                      leading: CircleAvatar(
-                        backgroundColor: Constants.sideworkPurple,
-                        child: Text(
-                          '${index + 1}',
-                          style: const TextStyle(
-                            color: Constants.lightTextColor,
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => ChatScreen(
+                              clientEmail: allWorkBookings[index]
+                                  ['clientEmail'],
+                              handymanEmail: allWorkBookings[index]
+                                  ['handymanEmail'],
+                              firstName: allWorkBookings[index]
+                                  ['clientFirstName'],
+                              lastName: allWorkBookings[index]
+                                  ['clientLastName'],
+                            ),
+                          ),
+                        );
+                      },
+                      child: ListTile(
+                        leading: CircleAvatar(
+                          backgroundColor: Constants.sideworkPurple,
+                          child: Text(
+                            '${index + 1}',
+                            style: const TextStyle(
+                              color: Constants.lightTextColor,
+                            ),
                           ),
                         ),
-                      ),
-                      title: Text(
-                          '${allWorkBookings[index]['clientFirstName']} ${allWorkBookings[index]['clientLastName']}'),
-                      subtitle: Text(
-                        '${allWorkBookings[index]['clientCity']}, ${allWorkBookings[index]['clientState']}',
-                        style: const TextStyle(
-                          fontWeight: FontWeight.w700,
-                          color: Constants.darkTextColor,
+                        title: Text(
+                          '${allWorkBookings[index]['clientFirstName']} ${allWorkBookings[index]['clientLastName']}',
                         ),
+                        subtitle: Text(
+                          '${allWorkBookings[index]['clientCity']}, ${allWorkBookings[index]['clientState']}',
+                          style: const TextStyle(
+                            fontWeight: FontWeight.w700,
+                            color: Constants.darkTextColor,
+                          ),
+                        ),
+                        trailing: allWorkBookings[index]['bookingConfirmed']
+                            ? ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  primary: Constants.sideworkButtonOrange,
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 6, vertical: 6),
+                                  textStyle: const TextStyle(
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                onPressed: () {
+                                  goToClientNotification(
+                                      allWorkBookings[index]['clientEmail']);
+                                },
+                                child: const Text('Go to client'),
+                              )
+                            : ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  primary: Constants.sideworkButtonOrange,
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 12, vertical: 6),
+                                  textStyle: const TextStyle(
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                onPressed: () {
+                                  acceptBooking(allWorkBookings[index].id,
+                                      allWorkBookings[index]['clientEmail']);
+                                },
+                                child: const Text('Accept'),
+                              ),
                       ),
-                      trailing: allWorkBookings[index]['bookingConfirmed']
-                          ? ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                primary: Constants.sideworkButtonOrange,
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 6, vertical: 6),
-                                textStyle: const TextStyle(
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              onPressed: () {
-                                goToClientNotification(
-                                    allWorkBookings[index]['clientEmail']);
-                              },
-                              child: const Text('Go to client'),
-                            )
-                          : ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                primary: Constants.sideworkButtonOrange,
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 12, vertical: 6),
-                                textStyle: const TextStyle(
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              onPressed: () {
-                                acceptBooking(allWorkBookings[index].id,
-                                    allWorkBookings[index]['clientEmail']);
-                              },
-                              child: const Text('Accept'),
-                            ),
                     ),
                   );
                 },

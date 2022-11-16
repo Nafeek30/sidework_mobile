@@ -214,10 +214,13 @@ Future<void> saveBooking(
           "clientPhoneNumber": clientUser.data()!['phoneNumber'],
           "handymanPhoneNumber": handyman.data()['phoneNumber'],
           "clientDescription": description,
-          "bookingHours": 0.0,
+          "rating": 0.0,
           "totalPrice": 0.0,
           "bookingConfirmed": false,
           "bookingPaid": false,
+          "bookingIds": [clientUser.data()!['email'], handyman.data()['email']],
+          "problems": false,
+          "timestamp": DateTime.now().millisecondsSinceEpoch,
         };
         FirebaseFirestore.instance
             .collection('bookings')

@@ -1,6 +1,7 @@
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:sidework_mobile/app_view/bookings.dart';
+import 'package:sidework_mobile/app_view/historyScreen.dart';
 import 'package:sidework_mobile/app_view/homePage.dart';
 import 'package:sidework_mobile/app_view/profiles.dart';
 
@@ -44,14 +45,21 @@ class BottomNavbarState extends State<BottomNavbar> {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (_) => Bookings(),
+              builder: (_) => const Bookings(),
             ),
           );
         } else if (_currentIndex == 2) {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (_) => Profiles(),
+              builder: (_) => const Profiles(),
+            ),
+          );
+        } else if (_currentIndex == 3) {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (_) => HistoryScreen(),
             ),
           );
         }
@@ -76,8 +84,8 @@ class BottomNavbarState extends State<BottomNavbar> {
           textAlign: TextAlign.center,
         ),
         BottomNavyBarItem(
-          icon: const Icon(Icons.settings),
-          title: const Text('Settings'),
+          icon: const Icon(Icons.history),
+          title: const Text('History'),
           activeColor: Colors.blue,
           textAlign: TextAlign.center,
         ),
