@@ -602,7 +602,7 @@ class ChatScreenState extends State<ChatScreen> {
         cardHolderCodeController.text == '' ||
         cardHolderCodeController.text.length != 3) {
       Fluttertoast.showToast(
-        msg: 'Year must be three digits.',
+        msg: 'Security code must be three digits.',
         backgroundColor: Constants.sideworkBlue,
         textColor: Constants.lightTextColor,
       );
@@ -610,7 +610,7 @@ class ChatScreenState extends State<ChatScreen> {
         cardHolderZipController.text == '' ||
         cardHolderZipController.text.length != 5) {
       Fluttertoast.showToast(
-        msg: 'Year must be five digits.',
+        msg: 'Zip code must be five digits.',
         backgroundColor: Constants.sideworkBlue,
         textColor: Constants.lightTextColor,
       );
