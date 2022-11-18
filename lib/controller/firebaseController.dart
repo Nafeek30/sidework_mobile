@@ -217,6 +217,7 @@ Future<void> saveBooking(
           "rating": 0.0,
           "totalPrice": 0.0,
           "bookingConfirmed": false,
+          "invoiceSent": false,
           "bookingPaid": false,
           "bookingIds": [clientUser.data()!['email'], handyman.data()['email']],
           "problems": false,

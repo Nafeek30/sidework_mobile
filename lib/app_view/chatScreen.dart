@@ -39,6 +39,7 @@ class ChatScreenState extends State<ChatScreen> {
   late var currentBooking;
   String? selectedValue = '5';
   bool bookingPaid = true;
+  bool invoiceSent = false;
   List<String> tags = [
     '1',
     '2',
@@ -72,9 +73,11 @@ class ChatScreenState extends State<ChatScreen> {
                   : workOption()
               : Container(),
           initialLoadFinish
-              ? bookingPaid
-                  ? Container()
-                  : clientOption()
+              ? invoiceSent
+                  ? bookingPaid
+                      ? Container()
+                      : clientOption()
+                  : Container()
               : Container(),
         ],
       ),
@@ -106,6 +109,7 @@ class ChatScreenState extends State<ChatScreen> {
         for (var v in snapshot.docs) {
           initialPrice = int.parse(v['totalPrice'].toStringAsFixed(0));
           bookingPaid = v['bookingPaid'];
+          invoiceSent = v['invoiceSent'];
           currentBooking = v;
         }
         initialLoadFinish = true;
@@ -430,6 +434,7 @@ class ChatScreenState extends State<ChatScreen> {
       var data = {
         "totalPrice": double.parse(price),
         "bookingPaid": false,
+        "invoiceSent": true,
       };
 
       FirebaseFirestore.instance
